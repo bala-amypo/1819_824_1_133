@@ -1,4 +1,6 @@
-
+import jakarata.persistance.Id;
+import jakarata.persistance.Column;
+import jakarata.persistance.Generatedvalue;
 @Entity
 public class StoreEntity{
      @id
@@ -42,6 +44,21 @@ public class StoreEntity{
      public Boolean getActive(){
         return active;
      }
-     pu
+     public void setActive(Boolean active){
+        this.active=active;
+     }
+
+     public StoreEntity(){
+        this.id=id;
+        this.storeName=storeName;
+        this.address=address;
+        this.region=region;
+        this.active=active;
+        
+     }
+
+     public StoreEntity(){
+
+     }
 
 }
