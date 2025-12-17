@@ -1,6 +1,6 @@
-import jakarta.persistance.Id;
-import jakarta.persistance.Column;
-import jakarta.persistance.Generatedvalue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Generatedvalue;
 @Entity
 public class StoreEntity{
      @id
