@@ -19,7 +19,7 @@ public class StoreEntity{
      }
 
      public void setStoreName(String storename){
-        
+        this.str
      }
 
 }
