@@ -9,7 +9,7 @@ public class StoreEntity{
      @Id
      @GeneratedValue(strategy=GenerationType.IDENTITY)
      private Long id;
-     @Column(unique=true)
+     @Column(unique=true,nullable=true)
      private String storeName;
      private String address;
      private String region;
