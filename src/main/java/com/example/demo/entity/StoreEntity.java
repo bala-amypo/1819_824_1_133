@@ -48,7 +48,7 @@ public class StoreEntity{
         this.active=active;
      }
 
-     public StoreEntity(){
+     public StoreEntity(long id,String storeName,String address,String region,Boolean active){
         this.id=id;
         this.storeName=storeName;
         this.address=address;
