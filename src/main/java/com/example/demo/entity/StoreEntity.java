@@ -6,8 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 @Entity
 public class StoreEntity{
-     @id
-     @Generatedvalue(strategy=GenerationType.IDENTITY)
+     @Id
+     @GeneratedValue(strategy=GenerationType.IDENTITY)
      private Long id;
      @Column(unique=true)
      private String storeName;
@@ -44,7 +44,7 @@ public class StoreEntity{
         return region;
      }
 
-     public Boolean getActive(){
+     public Boolean isActive(){
         return active;
      }
      public void setActive(Boolean active){
