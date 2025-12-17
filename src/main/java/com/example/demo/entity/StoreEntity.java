@@ -27,7 +27,7 @@ public class StoreEntity{
         this.storeName=storeName;
      }
      public String getStoreName(){
-        return storename;
+        return storeName;
      }
 
      public void setAddress(String address){
