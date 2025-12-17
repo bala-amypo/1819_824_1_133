@@ -32,4 +32,16 @@ public class StoreEntity{
         return address;
      }
 
+     public void setRegion(String storeName){
+        this.region=region;
+     }
+     public String getRegion(){
+        return region;
+     }
+
+     public Boolean getActive(){
+        return active;
+     }
+     pu
+
 }
