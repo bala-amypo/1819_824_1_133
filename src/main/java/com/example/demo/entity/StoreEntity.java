@@ -2,6 +2,6 @@
 @Entity
 public class StoreEntity{
      @id
-     @Generatedvalue(strate)
+     @Generatedvalue(strategy=GenerationType.IDENTITY)
      private long id;
 }
