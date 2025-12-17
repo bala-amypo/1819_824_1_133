@@ -18,8 +18,18 @@ public class StoreEntity{
         return id;
      }
 
-     public void setStoreName(String storename){
-        this.str
+     public void setStoreName(String storeName){
+        this.storeName=storeName;
+     }
+     public String getStoreName(){
+        return storename;
+     }
+
+     public void setAddress(String address){
+        this.address=address;
+     }
+     public String getAddress(){
+        return address;
      }
 
 }
