@@ -1,3 +1,5 @@
+package com.example.demo.service.implemtn
+
 public class StoreImplementation implements StoreService{
     @AutoWired
     StoreRepository obj;
@@ -5,5 +7,12 @@ public class StoreImplementation implements StoreService{
           obj.save(store);
     }
 
-    Store getStoreId(Long id)
+    Store getStoreId(Long id){
+
+        obj.getById(id);
+    }
+
+    Store fetAllProducts(){
+        obj.findAll();
+    }
 }

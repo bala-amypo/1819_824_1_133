@@ -5,4 +5,5 @@ import org.springframework.stereotype.Service;
 public interface StoreService{
     Store createStore(Store store);
     Store getStoreId(Long id);
+    Store getAllProducts();
 }
