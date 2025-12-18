@@ -1,4 +1,4 @@
 public interface StoreService{
     Store createStore(Store store);
-    Long getStoreId(Long )
+    Long getStoreId(Long id)
 }
