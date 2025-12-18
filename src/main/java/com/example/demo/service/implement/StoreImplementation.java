@@ -1,7 +1,7 @@
-package com.example.demo.service.implemtn
-
+package com.example.demo.service.implement;
+import com.example.demo.service.StoreService;
 public class StoreImplementation implements StoreService{
-    @AutoWired
+    @Autowired
     StoreRepository obj;
     Store createStore(Store store){
           obj.save(store);
