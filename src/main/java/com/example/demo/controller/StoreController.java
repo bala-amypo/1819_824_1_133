@@ -10,6 +10,7 @@ import com.example.demo.entity.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.service.StoreService;
 
+@RestController
 public class StoreController{
     @Autowired
     StoreService obj;
