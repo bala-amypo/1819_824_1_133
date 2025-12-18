@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 import jakarta.persistence.Id;
-demo/src/mainimport jakarta.persistence.Column;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
