@@ -19,7 +19,7 @@ public class ProductImplementation implements ProductService{
         return obj.findById(id).orElse(null);
     }
 
-    public List<Produndallct> getAllProducts(){
+    public List<Product> getAllProducts(){
         return obj.findAll();
     }
 }
