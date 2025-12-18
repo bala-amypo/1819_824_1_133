@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 @Entity
-public class ProductEntity{
+public class UserEntity{
      @Id
      @GeneratedValue(strategy=GenerationType.IDENTITY)
      private Long id;
@@ -44,23 +44,17 @@ public class ProductEntity{
         return password;
      }
 
-     public Boolean isActive(){
-        return active;
-     }
-     public void setActive(Boolean active){
-        this.active=active;
-     }
 
-     public ProductEntity(long id,String role,String email,String password,Boolean active){
+     public UserEntity(long id,String email,String role,String password){
         this.id=id;
-        this.role=role;
         this.email=email;
+        this.role=role;
         this.password=password;
-        this.active=active;
+       
         
      }
 
-     public ProductEntity(){
+     public UserEntity(){
 
      }
 
