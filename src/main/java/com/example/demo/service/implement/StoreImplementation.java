@@ -9,7 +9,7 @@ public class StoreImplementation implements StoreService{
 
     Store getStoreId(Long id){
 
-        obj.getById(id);
+        obj.findById(id);
     }
 
     Store fetAllProducts(){
