@@ -1,3 +1,9 @@
+package com.example.demo.service;
+import com.example.demo.entity.Product;
+
 public interface ProductService{
     Product createProduct (Product product);
+    Product getProductById(Long id);
+    List<Product> getAllProducts();
+
 }
