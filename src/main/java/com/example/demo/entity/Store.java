@@ -37,7 +37,7 @@ public class Store{
         return address;
      }
 
-     public void setRegion(String storeName){
+     public void setRegion(String region){
         this.region=region;
      }
      public String getRegion(){
