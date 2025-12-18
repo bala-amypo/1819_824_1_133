@@ -2,9 +2,11 @@ package com.example.demo.service.implement;
 import com.example.demo.service.ProductService;
 import com.example.demo.entity.Product;
 import java.util.List;
-import com.
+import com.example.demo.repository.ProductRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
-
+@Service
 
 public class ProductImplementation implements ProductService{
     @Autowired
