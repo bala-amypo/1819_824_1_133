@@ -11,8 +11,9 @@ public class ProductEntity{
      private Long id;
      @Column(unique=true,nullable=false)
      private String sku;
-     private String address;
-     private String region;
+     @Column(unique=true);
+     private String name;
+     private String category;
      private Boolean active=true;
      
 
@@ -30,18 +31,18 @@ public class ProductEntity{
         return sku;
      }
 
-     public void setAddress(String address){
-        this.address=address;
+     public void setName(String name){
+        this.name=name;
      }
-     public String getAddress(){
-        return address;
+     public String getName(){
+        return name;
      }
 
-     public void setRegion(String storeName){
-        this.region=region;
+     public void setCategory(String category){
+        this.category=category;
      }
-     public String getRegion(){
-        return region;
+     public String getCategory(){
+        return category;
      }
 
      public Boolean isActive(){
@@ -51,11 +52,11 @@ public class ProductEntity{
         this.active=active;
      }
 
-     public StoreEntity(long id,String storeName,String address,String region,Boolean active){
+     public StoreEntity(long id,String sku,String address,String region,Boolean active){
         this.id=id;
-        this.storeName=storeName;
+        this.sku=sku;
         this.address=address;
-        this.region=region;
+        this.category=category;
         this.active=active;
         
      }
