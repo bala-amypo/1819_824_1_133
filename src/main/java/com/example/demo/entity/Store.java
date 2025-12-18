@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 @Entity
-public class StoreEntity{
+public class Store{
      @Id
      @GeneratedValue(strategy=GenerationType.IDENTITY)
      private Long id;
@@ -51,7 +51,7 @@ public class StoreEntity{
         this.active=active;
      }
 
-     public StoreEntity(long id,String storeName,String address,String region,Boolean active){
+     public Store(long id,String storeName,String address,String region,Boolean active){
         this.id=id;
         this.storeName=storeName;
         this.address=address;
@@ -60,7 +60,7 @@ public class StoreEntity{
         
      }
 
-     public StoreEntity(){
+     public Store(){
 
      }
 
