@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.service.StoreService;
 
 @RestController
+@RequestMapping("/api/stores")
 public class StoreController{
     @Autowired
     StoreService obj;
