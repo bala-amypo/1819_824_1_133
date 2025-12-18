@@ -16,10 +16,10 @@ public class ProductImplementation implements ProductService{
     }
 
     public Product getProductById(Long id){
-        return obj.findById(id);
+        return obj.findById(id).orElse(null);
     }
 
     public List<Produndallct> getAllProducts(){
-        return obj.fi();
+        return obj.findAll();
     }
 }

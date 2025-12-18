@@ -23,7 +23,7 @@ public class ProductController{
     }
     
     @GetMapping("/{id}")
-    public Product gproductbyid(Long id){
+    public Product gproductbyid(@PathVarialble Long id){
         return obj.getProductById(id);
     }
 
