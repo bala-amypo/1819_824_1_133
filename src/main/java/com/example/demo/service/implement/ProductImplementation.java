@@ -1,3 +1,7 @@
+package com.example.demo
+
+
+
 public class ProductImplementation implements ProductService{
     @Autowired
     ProductRepository obj;
@@ -5,5 +9,11 @@ public class ProductImplementation implements ProductService{
         return obj.save(product);
     }
 
-    public Product 
+    public Product getProductById(Long id){
+        return obj.findById(id);
+    }
+
+    public List<Product> getAllProducts(){
+        return obj.findall();
+    }
 }
