@@ -13,6 +13,12 @@ import com.example.demo.service.ProductService;
 public class ProductController{
     @Autowired
     ProductService obj;
+
+    @PostMapping("/")
+    public cproduct(@RequestBody Product product){
+        obj.createProduct(product);
+    }
+
     
 
 }
