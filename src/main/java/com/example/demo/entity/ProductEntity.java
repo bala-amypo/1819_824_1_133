@@ -52,7 +52,7 @@ public class ProductEntity{
         this.active=active;
      }
 
-     public StoreEntity(long id,String sku,String address,String region,Boolean active){
+     public ProductEntity(long id,String sku,String address,String region,Boolean active){
         this.id=id;
         this.sku=sku;
         this.address=address;
@@ -61,7 +61,7 @@ public class ProductEntity{
         
      }
 
-     public StoreEntity(){
+     public ProductEntity(){
 
      }
 
