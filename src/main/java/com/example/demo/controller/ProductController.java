@@ -15,10 +15,20 @@ public class ProductController{
     ProductService obj;
 
     @PostMapping("/")
-    public cproduct(@RequestBody Product product){
-        obj.createProduct(product);
+    public Product cproduct(@RequestBody Product product){
+        return obj.createProduct(product);
+    }
+    
+    @GetMapping("/{id}")
+    public Product gproductbyid(Long id){
+        return obj.getProductById(id);
     }
 
-    
+    @GetMapping("/")
+    public List<Product> getp(){
+        return obj.
+    }
+
+
 
 }
