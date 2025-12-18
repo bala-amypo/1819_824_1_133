@@ -1,5 +1,5 @@
 package com.example.demo.controller;
-import or
+import org.springframework.web.bind.annotation.RestController;
 
 public class StoreController{
     @Autowired
