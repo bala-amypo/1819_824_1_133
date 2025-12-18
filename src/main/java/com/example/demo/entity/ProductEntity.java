@@ -52,10 +52,10 @@ public class ProductEntity{
         this.active=active;
      }
 
-     public ProductEntity(long id,String sku,String address,String region,Boolean active){
+     public ProductEntity(long id,String sku,String name,String category,Boolean active){
         this.id=id;
         this.sku=sku;
-        this.address=address;
+        this.name=name;
         this.category=category;
         this.active=active;
         
