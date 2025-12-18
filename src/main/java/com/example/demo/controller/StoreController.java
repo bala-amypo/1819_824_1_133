@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class StoreController{
     }
 
     @GetMapping("/")
-    public Store ShowallStore(){
+    public List<Store> ShowallStore(){
         return obj.getAllStores();
     }
 

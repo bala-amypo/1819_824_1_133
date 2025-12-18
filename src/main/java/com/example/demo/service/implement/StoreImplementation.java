@@ -13,7 +13,7 @@ public class StoreImplementation implements StoreService{
 
     public Store getStoreId(Long id){
 
-        return obj.findById(id);
+        return obj.findById(id).orElse(null);
     }
 
     public List<Store> getAllStores(){
