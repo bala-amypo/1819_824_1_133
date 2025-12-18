@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class StoreImplementation implements StoreService{
     @Autowired
     StoreRepository obj;
-    Store createStore(Store store){
+    public Store createStore(Store store){
           return obj.save(store);
     }
 
-    Store getStoreId(Long id){
+    public Store getStoreId(Long id){
 
         return obj.findById(id);
     }
 
-    Store getAllStores(){
+    public List<Store> getAllStores(){
         return obj.findAll();
     }
 }
