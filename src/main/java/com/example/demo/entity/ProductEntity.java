@@ -11,7 +11,7 @@ public class ProductEntity{
      private Long id;
      @Column(unique=true,nullable=false)
      private String sku;
-     @Column(unique=true);
+     @Column(unique=true)
      private String name;
      private String category;
      private Boolean active=true;
