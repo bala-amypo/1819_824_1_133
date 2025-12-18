@@ -1,5 +1,6 @@
 package com.example.demo.service.implement;
 import com.example.demo.service.StoreService;
+import com.example.demo.entity.Store;
 public class StoreImplementation implements StoreService{
     @Autowired
     StoreRepository obj;
