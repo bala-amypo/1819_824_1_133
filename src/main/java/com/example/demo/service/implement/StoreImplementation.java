@@ -12,7 +12,7 @@ public class StoreImplementation implements StoreService{
         obj.findById(id);
     }
 
-    Store fetAllProducts(){
+    Store getAllStores(){
         obj.findAll();
     }
 }
