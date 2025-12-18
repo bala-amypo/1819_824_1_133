@@ -15,6 +15,9 @@ public class UserEntity{
      private String password;
      private Boolean active=true;
      
+     @OneToOne
+     JoinColumn(name="user_id)
+     
 
      public void setId(Long id){
         this.id=id;

@@ -14,6 +14,10 @@ public class Store{
      private String address;
      private String region;
      private Boolean active=true;
+
+     @OneToOne
+     @JoinColumn(name="user_id")
+     UserEntity userent;
      
 
      public void setId(Long id){
