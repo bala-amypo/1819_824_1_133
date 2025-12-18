@@ -3,6 +3,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import com.example.demo.entity.Store;
 import org.springframework.bins.factory.annotation.Autowired;
 
@@ -10,16 +12,16 @@ public class StoreController{
     @Autowired
     StoreService obj;
     @PostMapping("/")
-    public Store StoreCreation(Store store){
+    public Store StoreCreation(@RequestBody Store store){
         return obj.createStore(store);
     }
     @GetMapping("/{id}")
-    Public Store StoreIdGet(Long id){
+    public Store StoreIdGet(@PathVariable Long id){
         return obj.getStoreId(id);
     }
 
     @GetMapping("/")
-    Public Store ShowallStore(){
+    public Store ShowallStore(){
         return obj.getAllStores();
     }
 
