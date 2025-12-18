@@ -1,4 +1,6 @@
 package com.example.demo.controller;
+import com.example.demo.entity.Product;
+import java.util.List;
 import org.springframework.web.bind.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.demo.service.ProductService;
+
 
 @RestController
 @RequestMapping("/api/products")
@@ -25,8 +28,8 @@ public class ProductController{
     }
 
     @GetMapping("/")
-    public List<Product> getp(){
-        return obj.
+    public List<Product> getproducts(){
+        return obj.getAllProducts();
     }
 
 
