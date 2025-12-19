@@ -28,6 +28,12 @@ public class InventoryLevel{
     private int quantity;
 
     private LocalDateTime lastUpdated;
+    @PrePersist
+    @PreUpdate
+
+    public void updatedTimestamp(){
+          this.latUpdated
+    }
     
 
 }
