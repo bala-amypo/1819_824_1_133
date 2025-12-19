@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import com.example.demo.entity.Store;
 import com.example.demo.entity.Product;
+import java.util.LocalDateTime;
 
 @Entity
 public class InventoryLevel{
@@ -26,6 +27,6 @@ public class InventoryLevel{
     @Column(nullable=false)
     private int quantity;
 
-    
+
 
 }
