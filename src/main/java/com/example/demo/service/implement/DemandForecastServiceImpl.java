@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-
 @Service
 @Transactional
 public class DemandForecastServiceImpl implements DemandForecastService {
@@ -19,11 +17,6 @@ public class DemandForecastServiceImpl implements DemandForecastService {
 
     @Override
     public DemandForecast createForecast(DemandForecast forecast) {
-
-        if (forecast.getForecastDate().isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Forecast date must be in the future");
-        }
-
         return obj.save(forecast);
     }
 
