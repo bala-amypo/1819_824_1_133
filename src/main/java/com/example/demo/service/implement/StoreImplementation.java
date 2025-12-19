@@ -7,7 +7,7 @@ import com.example.demo.entity.Store;
 import com.example.demo.repository.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 @Service
-public class StoreImplementa tion implements StoreService{
+public class StoreImplementation implements StoreService{
     @Autowired
     StoreRepository obj;
 
