@@ -14,7 +14,7 @@ public class Store{
      private String address;
      private String region;
      private Boolean active=true;
-
+ 
    
      
 
