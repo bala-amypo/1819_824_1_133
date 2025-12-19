@@ -5,7 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
 @Entity
-public class UserEntity{
+public class User{
      @Id
      @GeneratedValue(strategy=GenerationType.IDENTITY)
      private Long id;
@@ -15,9 +15,7 @@ public class UserEntity{
      private String password;
      private Boolean active=true;
      
-   //   @OneToOne
-   //   JoinColumn(name="user_id)
-   //   Store str;
+  
 
      public void setId(Long id){
         this.id=id;
@@ -48,7 +46,7 @@ public class UserEntity{
      }
 
 
-     public UserEntity(long id,String email,String role,String password){
+     public User(long id,String email,String role,String password){
         this.id=id;
         this.email=email;
         this.role=role;
@@ -57,7 +55,7 @@ public class UserEntity{
         
      }
 
-     public UserEntity(){
+     public User(){
 
      }
 
