@@ -32,7 +32,7 @@ public class InventoryLevel{
     @PreUpdate
 
     public void updatedTimestamp(){
-          this.latUpdated
+          this.lastUpdated=LocalDateTime.now();
     }
     
 
