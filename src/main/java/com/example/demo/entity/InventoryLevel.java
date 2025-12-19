@@ -8,5 +8,5 @@ import jakarta.persistence.Entity;
 public class InventoryLevel{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY);
-      
+    private Long id;  
 }

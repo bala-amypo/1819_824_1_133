@@ -14,10 +14,7 @@ public class Store{
      private String address;
      private String region;
      private Boolean active=true;
- 
-   
      
-
      public void setId(Long id){
         this.id=id;
      }
