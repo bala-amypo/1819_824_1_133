@@ -15,7 +15,6 @@ public class InventoryLevelController {
     @Autowired
     private InventoryLevelService obj;
 
-    // PUT /api/inventory/update?storeId=1&productId=2&quantity=50
     @PutMapping("/update")
     public InventoryLevel updateInventory(
             @RequestParam Long storeId,
@@ -25,7 +24,6 @@ public class InventoryLevelController {
         return obj.updateInventory(storeId, productId, quantity);
     }
 
-    // GET /api/inventory/store/1
     @GetMapping("/store/{storeId}")
     public List<InventoryLevel> getInventoryByStore(
             @PathVariable Long storeId) {
