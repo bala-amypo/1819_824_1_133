@@ -27,6 +27,6 @@ public class InventoryLevel{
     @Column(nullable=false)
     private int quantity;
 
-
+    
 
 }
