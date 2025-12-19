@@ -10,5 +10,7 @@ public class InventoryLevel{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;  
 
-    @Many
+    @ManyToOne
+    @JoinColumn(name="store_id")
+    
 }
