@@ -46,7 +46,7 @@ public class InventoryLevel {
     }
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "store_id", nullable = true)
+    @JoinColumn(name = "store_id", nullable = false)
     public Store getStore() {
         return store;
     }
