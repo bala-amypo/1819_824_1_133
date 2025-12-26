@@ -1,4 +1,4 @@
-package com.example.demo.service.implement;
+package com.example.demo.service.impl;
 
 import com.example.demo.entity.Product;
 import com.example.demo.exception.BadRequestException;
@@ -12,36 +12,35 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository productRepo;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductRepository productRepo) {
+        this.productRepo = productRepo;
     }
 
     @Override
     public Product createProduct(Product product) {
-        if (productRepository.findBySku(product.getSku()).isPresent()) {
-            // REQUIRED exact phrase:
+        if (productRepo.findBySku(product.getSku()).isPresent()) {
             throw new BadRequestException("SKU already exists");
         }
-        return productRepository.save(product);
+        return productRepo.save(product);
     }
 
     @Override
     public Product getProductById(Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("not found"));
+        return productRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productRepo.findAll();
     }
 
     @Override
     public void deactivateProduct(Long id) {
-        Product p = getProductById(id);
-        p.setActive(false);
-        productRepository.save(p);
+        Product product = getProductById(id);
+        product.setActive(false);
+        productRepo.save(product);
     }
 }
