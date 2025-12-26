@@ -4,9 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"store_id", "product_id"})
-})
+@Table(name = "inventory_levels",
+       uniqueConstraints = @UniqueConstraint(columnNames = {"store_id", "product_id"}))
 public class InventoryLevel {
 
     @Id
@@ -33,18 +32,41 @@ public class InventoryLevel {
         this.lastUpdated = LocalDateTime.now();
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // ===== Getters & Setters =====
 
-    public Store getStore() { return store; }
-    public void setStore(Store store) { this.store = store; }
+    public Long getId() {
+        return id;
+    }
 
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
+    public Store getStore() {
+        return store;
+    }
 
-    public Integer getQuantity() { return quantity; }
-    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+    public Product getProduct() {
+        return product;
+    }
 
-    public LocalDateTime getLastUpdated() { return lastUpdated; }
-    public void setLastUpdated(LocalDateTime lastUpdated) { this.lastUpdated = lastUpdated; }
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

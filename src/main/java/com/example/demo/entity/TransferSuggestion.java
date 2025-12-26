@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "transfer_suggestions")
 public class TransferSuggestion {
 
     @Id
@@ -21,43 +22,76 @@ public class TransferSuggestion {
 
     private Integer suggestedQuantity;
 
-    private String priority; // HIGH/MEDIUM/LOW
-    private String status = "PENDING"; // default PENDING
-
     private String reason;
+
+    private String status = "PENDING";
 
     private LocalDateTime generatedAt;
 
     @PrePersist
     public void prePersist() {
         this.generatedAt = LocalDateTime.now();
-        if (this.status == null) this.status = "PENDING";
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // ===== Getters & Setters =====
 
-    public Store getSourceStore() { return sourceStore; }
-    public void setSourceStore(Store sourceStore) { this.sourceStore = sourceStore; }
+    public Long getId() {
+        return id;
+    }
 
-    public Store getTargetStore() { return targetStore; }
-    public void setTargetStore(Store targetStore) { this.targetStore = targetStore; }
+    public Store getSourceStore() {
+        return sourceStore;
+    }
 
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
+    public Store getTargetStore() {
+        return targetStore;
+    }
 
-    public Integer getSuggestedQuantity() { return suggestedQuantity; }
-    public void setSuggestedQuantity(Integer suggestedQuantity) { this.suggestedQuantity = suggestedQuantity; }
+    public Product getProduct() {
+        return product;
+    }
 
-    public String getPriority() { return priority; }
-    public void setPriority(String priority) { this.priority = priority; }
+    public Integer getSuggestedQuantity() {
+        return suggestedQuantity;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public String getReason() {
+        return reason;
+    }
 
-    public String getReason() { return reason; }
-    public void setReason(String reason) { this.reason = reason; }
+    public String getStatus() {
+        return status;
+    }
 
-    public LocalDateTime getGeneratedAt() { return generatedAt; }
-    public void setGeneratedAt(LocalDateTime generatedAt) { this.generatedAt = generatedAt; }
+    public LocalDateTime getGeneratedAt() {
+        return generatedAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setSourceStore(Store sourceStore) {
+        this.sourceStore = sourceStore;
+    }
+
+    public void setTargetStore(Store targetStore) {
+        this.targetStore = targetStore;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setSuggestedQuantity(Integer suggestedQuantity) {
+        this.suggestedQuantity = suggestedQuantity;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
