@@ -134,7 +134,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- 🔥 CRITICAL: Java 17 for main + test (fixes 'var' error) -->
+            <!-- CRITICAL: Java 17 for main + test (fixes 'var' error) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
