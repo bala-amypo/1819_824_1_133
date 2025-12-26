@@ -1,14 +1,17 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.DemandForecast;
-
+import com.example.demo.entity.Product;
+import com.example.demo.entity.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.time.LocalDate;
+import java.util.List;
 
-@Repository
 public interface DemandForecastRepository extends JpaRepository<DemandForecast, Long> {
 
-    Optional<DemandForecast> findByStoreIdAndProductId(Long storeId, Long productId);
+    List<DemandForecast> findByStoreAndProductAndForecastDateAfter(Store store, Product product, LocalDate date); // REQUIRED exact
+
+    List<DemandForecast> findByStore_Id(Long storeId);   // used in tests
+    List<DemandForecast> findByProduct_Id(Long productId); // used in tests
 }
