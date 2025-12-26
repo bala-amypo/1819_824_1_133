@@ -40,7 +40,6 @@ public class TransferSuggestion {
         if (priority == null) priority = 1;
     }
 
-    // ===== getters & setters =====
 
     public Long getId() { return id; }
 

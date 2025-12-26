@@ -39,7 +39,6 @@ public class UserAccount {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // ===== Getters & Setters =====
 
     public Long getId() {
         return id;

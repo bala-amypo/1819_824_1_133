@@ -25,7 +25,6 @@ public class DemandForecast {
 
     private Double confidenceScore;
 
-    // ===== getters & setters =====
 
     public Long getId() { return id; }
 
@@ -49,7 +48,6 @@ public class DemandForecast {
         this.forecastDate = forecastDate;
     }
 
-    // 🔥 REQUIRED BY TEST
     public void setForecastedDemand(Integer forecastedDemand) {
         this.forecastedDemand = forecastedDemand;
     }
