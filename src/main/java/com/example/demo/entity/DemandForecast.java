@@ -12,29 +12,16 @@ public class DemandForecast {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    @Column(name = "forecasted_demand", nullable = false)
-    private int forecastedDemand;
-
-    @Column(name = "predicted_demand", nullable = false)
-    private int predictedDemand;
-
-    @Column(name = "confidence_score")
-    private double confidenceScore;
-
-    @Column(name = "forecast_date")
     private LocalDate forecastDate;
 
-    @PrePersist
-    public void initDefaults() {
-        this.predictedDemand = this.forecastedDemand;
-    }
+    private Integer forecastedDemand;
+
+    private Double confidenceScore;
 
     // ===== Getters & Setters =====
 
@@ -46,43 +33,43 @@ public class DemandForecast {
         return store;
     }
 
-    public void setStore(Store store) {
-        this.store = store;
-    }
-
     public Product getProduct() {
         return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public int getForecastedDemand() {
-        return forecastedDemand;
-    }
-
-    public void setForecastedDemand(int forecastedDemand) {
-        this.forecastedDemand = forecastedDemand;
-    }
-
-    public int getPredictedDemand() {
-        return predictedDemand;
-    }
-
-    public double getConfidenceScore() {
-        return confidenceScore;
-    }
-
-    public void setConfidenceScore(double confidenceScore) {
-        this.confidenceScore = confidenceScore;
     }
 
     public LocalDate getForecastDate() {
         return forecastDate;
     }
 
+    public Integer getForecastedDemand() {
+        return forecastedDemand;
+    }
+
+    public Double getConfidenceScore() {
+        return confidenceScore;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     public void setForecastDate(LocalDate forecastDate) {
         this.forecastDate = forecastDate;
+    }
+
+    public void setForecastedDemand(Integer forecastedDemand) {
+        this.forecastedDemand = forecastedDemand;
+    }
+
+    public void setConfidenceScore(Double confidenceScore) {
+        this.confidenceScore = confidenceScore;
     }
 }
