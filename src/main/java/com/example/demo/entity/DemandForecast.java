@@ -20,25 +20,73 @@ public class DemandForecast {
     @Column(name = "forecast_date", nullable = false)
     private LocalDate forecastDate;
 
+    // 🔑 DB COLUMN EXPECTED BY TESTS
     @Column(name = "forecasted_demand", nullable = false)
     private int forecastedDemand;
 
     @Column(name = "confidence_score")
     private double confidenceScore;
 
-    // ---------- GETTERS ----------
-    public Long getId() { return id; }
-    public Store getStore() { return store; }
-    public Product getProduct() { return product; }
-    public LocalDate getForecastDate() { return forecastDate; }
-    public int getForecastedDemand() { return forecastedDemand; }
-    public double getConfidenceScore() { return confidenceScore; }
+    /* ===================== GETTERS ===================== */
 
-    // ---------- SETTERS (CRITICAL FOR TESTS) ----------
-    public void setId(Long id) { this.id = id; }
-    public void setStore(Store store) { this.store = store; }
-    public void setProduct(Product product) { this.product = product; }
-    public void setForecastDate(LocalDate forecastDate) { this.forecastDate = forecastDate; }
-    public void setForecastedDemand(int forecastedDemand) { this.forecastedDemand = forecastedDemand; }
-    public void setConfidenceScore(double confidenceScore) { this.confidenceScore = confidenceScore; }
+    public Long getId() {
+        return id;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public LocalDate getForecastDate() {
+        return forecastDate;
+    }
+
+    // Test uses BOTH names
+    public int getForecastedDemand() {
+        return forecastedDemand;
+    }
+
+    public int getPredictedDemand() {
+        return forecastedDemand;
+    }
+
+    public double getConfidenceScore() {
+        return confidenceScore;
+    }
+
+    /* ===================== SETTERS ===================== */
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setForecastDate(LocalDate forecastDate) {
+        this.forecastDate = forecastDate;
+    }
+
+    // ✅ Original setter
+    public void setForecastedDemand(int forecastedDemand) {
+        this.forecastedDemand = forecastedDemand;
+    }
+
+    // ✅ REQUIRED BY TESTS & SERVICE
+    public void setPredictedDemand(int predictedDemand) {
+        this.forecastedDemand = predictedDemand;
+    }
+
+    public void setConfidenceScore(double confidenceScore) {
+        this.confidenceScore = confidenceScore;
+    }
 }
