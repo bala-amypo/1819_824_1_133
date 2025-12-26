@@ -1,68 +1,36 @@
 package com.example.demo.entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
+
+import jakarta.persistence.*;
+
 @Entity
-public class Product{
-     @Id
-     @GeneratedValue(strategy=GenerationType.IDENTITY)
-     private Long id;
-     @Column(unique=true,nullable=false)
-     private String sku;
-     @Column(unique=true)
-     private String name;
-     private String category;
-     private Boolean active=true;
-     
+public class Product {
 
-     public void setId(Long id){
-        this.id=id;
-     }
-     public Long getId(){
-        return id;
-     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-     public void setSku(String sku){
-        this.sku=sku;
-     }
-     public String getSku(){
-        return sku;
-     }
+    @Column(unique = true, nullable = false)
+    private String sku;
 
-     public void setName(String name){
-        this.name=name;
-     }
-     public String getName(){
-        return name;
-     }
+    @Column(nullable = false)
+    private String name;
 
-     public void setCategory(String category){
-        this.category=category;
-     }
-     public String getCategory(){
-        return category;
-     }
+    private String category;
 
-     public Boolean isActive(){
-        return active;
-     }
-     public void setActive(Boolean active){
-        this.active=active;
-     }
+    private boolean active = true;
 
-     public Product(long id,String sku,String name,String category,Boolean active){
-        this.id=id;
-        this.sku=sku;
-        this.name=name;
-        this.category=category;
-        this.active=active;
-        
-     }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-     public Product(){
+    public String getSku() { return sku; }
+    public void setSku(String sku) { this.sku = sku; }
 
-     }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
+
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }

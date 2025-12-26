@@ -1,90 +1,50 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "inventory_levels")
-@Access(AccessType.PROPERTY)
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"store_id", "product_id"})
+})
 public class InventoryLevel {
-
-    private Long id;
-    private Store store;
-    private Product product;
-    private Integer quantity;
-    private LocalDateTime lastUpdated;
-
-    public InventoryLevel() {
-    }
-
-    public InventoryLevel(Store store, Product product, Integer quantity) {
-        this.store = store;
-        this.product = product;
-        this.quantity = quantity;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "store_id", nullable = false)
-    public Store getStore() {
-        return store;
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
-    }
+    private Store store;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
-    public Product getProduct() {
-        return product;
-    }
+    private Product product;
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    private Integer quantity;
 
-    @Column(nullable = false)
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
-    }
-
-    public void setLastUpdated(LocalDateTime lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
+    private LocalDateTime lastUpdated;
 
     @PrePersist
-    @PreUpdate
-    private void updateTimestamp() {
+    public void prePersist() {
         this.lastUpdated = LocalDateTime.now();
     }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.lastUpdated = LocalDateTime.now();
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Store getStore() { return store; }
+    public void setStore(Store store) { this.store = store; }
+
+    public Product getProduct() { return product; }
+    public void setProduct(Product product) { this.product = product; }
+
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
+
+    public LocalDateTime getLastUpdated() { return lastUpdated; }
+    public void setLastUpdated(LocalDateTime lastUpdated) { this.lastUpdated = lastUpdated; }
 }

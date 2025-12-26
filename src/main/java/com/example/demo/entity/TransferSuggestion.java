@@ -1,125 +1,63 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Access;
-import jakarta.persistence.AccessType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "transfer_suggestions")
-@Access(AccessType.PROPERTY)
 public class TransferSuggestion {
-
-    private Long id;
-    private Store sourceStore;
-    private Store targetStore;
-    private Product product;
-    private Integer quantity;
-    private String priority;
-    private LocalDateTime suggestedAt;
-    private String status;
-
-    public TransferSuggestion() {
-    }
-
-    public TransferSuggestion(
-            Store sourceStore,
-            Store targetStore,
-            Product product,
-            Integer quantity,
-            String priority) {
-
-        this.sourceStore = sourceStore;
-        this.targetStore = targetStore;
-        this.product = product;
-        this.quantity = quantity;
-        this.priority = priority;
-        this.status = "PENDING";
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "source_store_id", nullable = false)
-    public Store getSourceStore() {
-        return sourceStore;
-    }
-
-    public void setSourceStore(Store sourceStore) {
-        this.sourceStore = sourceStore;
-    }
+    private Store sourceStore;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "target_store_id", nullable = false)
-    public Store getTargetStore() {
-        return targetStore;
-    }
-
-    public void setTargetStore(Store targetStore) {
-        this.targetStore = targetStore;
-    }
+    private Store targetStore;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id", nullable = false)
-    public Product getProduct() {
-        return product;
+    private Product product;
+
+    private Integer suggestedQuantity;
+
+    private String priority; // HIGH/MEDIUM/LOW
+    private String status = "PENDING"; // default PENDING
+
+    private String reason;
+
+    private LocalDateTime generatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.generatedAt = LocalDateTime.now();
+        if (this.status == null) this.status = "PENDING";
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @Column(nullable = false)
-    public Integer getQuantity() {
-        return quantity;
-    }
+    public Store getSourceStore() { return sourceStore; }
+    public void setSourceStore(Store sourceStore) { this.sourceStore = sourceStore; }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
+    public Store getTargetStore() { return targetStore; }
+    public void setTargetStore(Store targetStore) { this.targetStore = targetStore; }
 
-    @Column(nullable = false)
-    public String getPriority() {
-        return priority;
-    }
+    public Product getProduct() { return product; }
+    public void setProduct(Product product) { this.product = product; }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
+    public Integer getSuggestedQuantity() { return suggestedQuantity; }
+    public void setSuggestedQuantity(Integer suggestedQuantity) { this.suggestedQuantity = suggestedQuantity; }
 
-    public LocalDateTime getSuggestedAt() {
-        return suggestedAt;
-    }
+    public String getPriority() { return priority; }
+    public void setPriority(String priority) { this.priority = priority; }
 
-    public void setSuggestedAt(LocalDateTime suggestedAt) {
-        this.suggestedAt = suggestedAt;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    @Column(nullable = false)
-    public String getStatus() {
-        return status;
-    }
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    
+    public LocalDateTime getGeneratedAt() { return generatedAt; }
+    public void setGeneratedAt(LocalDateTime generatedAt) { this.generatedAt = generatedAt; }
 }

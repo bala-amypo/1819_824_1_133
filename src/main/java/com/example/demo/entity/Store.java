@@ -1,66 +1,34 @@
 package com.example.demo.entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Entity;
+
+import jakarta.persistence.*;
+
 @Entity
-public class Store{
-     @Id
-     @GeneratedValue(strategy=GenerationType.IDENTITY)
-     private Long id;
-     @Column(unique=true,nullable=false)
-     private String storeName;
-     private String address;
-     private String region;
-     private Boolean active=true;
-     
-     public void setId(Long id){
-        this.id=id;
-     }
-     public Long getId(){
-        return id;
-     }
+public class Store {
 
-     public void setStoreName(String storeName){
-        this.storeName=storeName;
-     }
-     public String getStoreName(){
-        return storeName;
-     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-     public void setAddress(String address){
-        this.address=address;
-     }
-     public String getAddress(){
-        return address;
-     }
+    @Column(unique = true, nullable = false)
+    private String storeName;
 
-     public void setRegion(String region){
-        this.region=region;
-     }
-     public String getRegion(){
-        return region;
-     }
+    private String address;
+    private String region;
 
-     public Boolean isActive(){
-        return active;
-     }
-     public void setActive(Boolean active){
-        this.active=active;
-     }
+    private boolean active = true;
 
-     public Store(long id,String storeName,String address,String region,Boolean active){
-        this.id=id;
-        this.storeName=storeName;
-        this.address=address;
-        this.region=region;
-        this.active=active;
-        
-     }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-     public Store(){
+    public String getStoreName() { return storeName; }
+    public void setStoreName(String storeName) { this.storeName = storeName; }
 
-     }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 
+    public String getRegion() { return region; }
+    public void setRegion(String region) { this.region = region; }
+
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
