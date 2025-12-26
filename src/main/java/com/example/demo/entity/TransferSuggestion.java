@@ -11,43 +11,81 @@ public class TransferSuggestion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "source_store_id")
-    private Store sourceStore;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "target_store_id")
-    private Store targetStore;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
+    @ManyToOne
     private Product product;
 
-    @Column(nullable = false)
-    private Integer suggestedQuantity;
+    @ManyToOne
+    private Store sourceStore;
 
-    @Column(nullable = false)
+    @ManyToOne
+    private Store targetStore;
+
+    private int suggestedQuantity;
+
     private String reason;
 
-    @Column(nullable = false)
     private String status;
 
-    // 🔴 REQUIRED BY DB
-    @Column(nullable = false)
-    private Integer priority;
+    private int priority;
 
-    @Column(nullable = false)
     private LocalDateTime generatedAt;
+
+    public TransferSuggestion() {}
 
     @PrePersist
     public void prePersist() {
-        if (priority == null) {
-            priority = 1;
+        this.generatedAt = LocalDateTime.now();
+        if (this.priority == 0) {
+            this.priority = 1;
         }
-        generatedAt = LocalDateTime.now();
+        if (this.status == null) {
+            this.status = "PENDING";
+        }
     }
 
-    // ---------- getters & setters ----------
+    // ---------------- GETTERS ----------------
+
+    public Long getId() {
+        return id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Store getSourceStore() {
+        return sourceStore;
+    }
+
+    public Store getTargetStore() {
+        return targetStore;
+    }
+
+    public int getSuggestedQuantity() {
+        return suggestedQuantity;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public LocalDateTime getGeneratedAt() {
+        return generatedAt;
+    }
+
+    // ---------------- SETTERS (REQUIRED BY SERVICE & TESTS) ----------------
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public void setSourceStore(Store sourceStore) {
         this.sourceStore = sourceStore;
@@ -57,11 +95,7 @@ public class TransferSuggestion {
         this.targetStore = targetStore;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public void setSuggestedQuantity(Integer suggestedQuantity) {
+    public void setSuggestedQuantity(int suggestedQuantity) {
         this.suggestedQuantity = suggestedQuantity;
     }
 
@@ -73,7 +107,7 @@ public class TransferSuggestion {
         this.status = status;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 }

@@ -6,9 +6,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(
     name = "inventory_levels",
-    uniqueConstraints = @UniqueConstraint(
-        columnNames = {"store_id", "product_id"}
-    )
+    uniqueConstraints = @UniqueConstraint(columnNames = {"store_id", "product_id"})
 )
 public class InventoryLevel {
 
@@ -16,27 +14,26 @@ public class InventoryLevel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "store_id")
+    @ManyToOne
     private Store store;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
+    @ManyToOne
     private Product product;
 
-    @Column(nullable = false)
-    private Integer quantity;
+    private int quantity;
 
-    @Column(name = "last_updated", nullable = false)
     private LocalDateTime lastUpdated;
+
+    public InventoryLevel() {}
 
     @PrePersist
     @PreUpdate
     public void updateTimestamp() {
-        lastUpdated = LocalDateTime.now();
+        this.lastUpdated = LocalDateTime.now();
     }
 
-    // ✅ GETTERS (FIX)
+    // -------- REQUIRED GETTERS --------
+
     public Long getId() {
         return id;
     }
@@ -45,28 +42,28 @@ public class InventoryLevel {
         return store;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
-    }
-
-    // SETTERS
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
     }
 
-    public void setQuantity(Integer quantity) {
+    // TEST CALLS THIS
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
     }
 }
