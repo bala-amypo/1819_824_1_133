@@ -12,7 +12,6 @@ public class AuthResponseDto {
         this.expiresAt = expiresAt;
     }
 
-    // ===== Getters =====
 
     public String getToken() {
         return token;

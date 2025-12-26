@@ -5,7 +5,6 @@ public class AuthRequestDto {
     private String email;
     private String password;
 
-    // ===== Getters & Setters =====
 
     public String getEmail() {
         return email;

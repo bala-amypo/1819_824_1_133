@@ -7,7 +7,6 @@ public class RegisterRequestDto {
     private String password;
     private String role;
 
-    // ===== Getters & Setters =====
 
     public String getEmail() {
         return email;
