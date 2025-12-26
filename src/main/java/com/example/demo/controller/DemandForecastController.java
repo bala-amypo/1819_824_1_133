@@ -2,29 +2,27 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.DemandForecast;
 import com.example.demo.service.DemandForecastService;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/forecasts")
 public class DemandForecastController {
 
-    @Autowired
-    private DemandForecastService obj;
+    private final DemandForecastService demandForecastService;
 
-    @PostMapping
-    public DemandForecast createForecast(
-            @RequestBody DemandForecast forecast) {
-
-        return obj.createForecast(forecast);
+    public DemandForecastController(DemandForecastService demandForecastService) {
+        this.demandForecastService = demandForecastService;
     }
 
-    @GetMapping("/store/{storeId}/product/{productId}")
-    public DemandForecast getForecast(
-            @PathVariable Long storeId,
-            @PathVariable Long productId) {
+    @PostMapping
+    public DemandForecast create(@RequestBody DemandForecast forecast) {
+        return demandForecastService.createForecast(forecast);
+    }
 
-        return obj.getForecast(storeId, productId);
+    @GetMapping("/store/{storeId}")
+    public List<DemandForecast> byStore(@PathVariable Long storeId) {
+        return demandForecastService.getForecastsForStore(storeId);
     }
 }
