@@ -1,39 +1,62 @@
-package com.example.demo.service.impl;
+package com.example.demo.service.implement;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.dto.AuthRequestDto;
+import com.example.demo.dto.AuthResponseDto;
+import com.example.demo.dto.RegisterRequestDto;
+import com.example.demo.entity.UserAccount;
+import com.example.demo.exception.BadRequestException;
+import com.example.demo.repository.UserAccountRepository;
+import com.example.demo.security.JwtUtil;
 import com.example.demo.service.AuthService;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private UserRepository obj;
+    private final UserAccountRepository userAccountRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    @Override
-    public User register(User user) {
-
-        if (obj.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already registered");
-        }
-
-        return obj.save(user);
+    public AuthServiceImpl(UserAccountRepository userAccountRepository,
+                           PasswordEncoder passwordEncoder,
+                           JwtUtil jwtUtil) {
+        this.userAccountRepository = userAccountRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
-    public User login(String email, String password) {
+    public void register(RegisterRequestDto dto) {
+        if (userAccountRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new BadRequestException("Duplicate email");
+        }
+        UserAccount user = new UserAccount();
+        user.setEmail(dto.getEmail());
+        user.setFullName(dto.getFullName());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setRole(dto.getRole() == null ? "ROLE_USER" : dto.getRole());
+        userAccountRepository.save(user);
+    }
 
-        User user = obj.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    @Override
+    public AuthResponseDto login(AuthRequestDto dto) {
+        UserAccount user = userAccountRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new BadRequestException("Invalid credentials"));
 
-        if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Invalid password");
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            throw new BadRequestException("Invalid credentials");
         }
 
-        return user;
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        claims.put("role", user.getRole());
+
+        String token = jwtUtil.generateToken(claims, user.getEmail());
+        long expiresAt = System.currentTimeMillis() + jwtUtil.getExpirationMillis();
+        return new AuthResponseDto(token, expiresAt);
     }
 }
