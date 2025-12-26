@@ -13,7 +13,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Override
+@Service
+public class InventoryLevelServiceImpl implements InventoryLevelService {
+
+    private final InventoryLevelRepository inventoryRepo;
+    private final StoreRepository storeRepo;
+    private final ProductRepository productRepo;
+
+    public InventoryLevelServiceImpl(
+            InventoryLevelRepository inventoryRepo,
+            StoreRepository storeRepo,
+            ProductRepository productRepo) {
+        this.inventoryRepo = inventoryRepo;
+        this.storeRepo = storeRepo;
+        this.productRepo = productRepo;
+    }
+
+    @Override
+   
 public InventoryLevel createOrUpdateInventory(InventoryLevel inv) {
 
     if (inv.getQuantity() < 0) {
@@ -36,4 +53,16 @@ public InventoryLevel createOrUpdateInventory(InventoryLevel inv) {
                 inv.setProduct(product);
                 return inventoryRepo.save(inv);
             });
+}
+
+
+    @Override
+    public List<InventoryLevel> getInventoryForStore(Long storeId) {
+        return inventoryRepo.findByStore_Id(storeId);
+    }
+
+    @Override
+    public List<InventoryLevel> getInventoryForProduct(Long productId) {
+        return inventoryRepo.findByProduct_Id(productId);
+    }
 }
