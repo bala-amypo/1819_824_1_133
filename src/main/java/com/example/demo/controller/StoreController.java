@@ -21,13 +21,13 @@ public class StoreController {
         return storeService.createStore(store);
     }
 
+    @GetMapping
+    public List<Store> getAll() {
+        return storeService.getAllStores();
+    }
+
     @GetMapping("/{id}")
     public Store getById(@PathVariable Long id) {
         return storeService.getStoreById(id);
-    }
-
-    @GetMapping
-    public List<Store> list() {
-        return storeService.getAllStores();
     }
 }
