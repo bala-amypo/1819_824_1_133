@@ -13,51 +13,27 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class InventoryLevelServiceImpl implements InventoryLevelService {
+@Override
+public InventoryLevel createOrUpdateInventory(InventoryLevel inv) {
 
-    private final InventoryLevelRepository inventoryRepo;
-    private final StoreRepository storeRepo;
-    private final ProductRepository productRepo;
-
-    public InventoryLevelServiceImpl(
-            InventoryLevelRepository inventoryRepo,
-            StoreRepository storeRepo,
-            ProductRepository productRepo) {
-        this.inventoryRepo = inventoryRepo;
-        this.storeRepo = storeRepo;
-        this.productRepo = productRepo;
+    if (inv.getQuantity() < 0) {
+        throw new BadRequestException("Quantity must be >= 0");
     }
 
-    @Override
-    public InventoryLevel createOrUpdateInventory(InventoryLevel inv) {
+    Store store = storeRepo.findById(inv.getStore().getId())
+            .orElseThrow(() -> new BadRequestException("Store not found"));
 
-        if (inv.getQuantity() < 0) {
-            throw new BadRequestException("Quantity must be >= 0");
-        }
+    Product product = productRepo.findById(inv.getProduct().getId())
+            .orElseThrow(() -> new BadRequestException("Product not found"));
 
-        Store store = storeRepo.findById(inv.getStore().getId()).orElseThrow();
-        Product product = productRepo.findById(inv.getProduct().getId()).orElseThrow();
-
-        return inventoryRepo.findByStoreAndProduct(store, product)
-                .map(existing -> {
-                    existing.setQuantity(inv.getQuantity());
-                    return inventoryRepo.save(existing);
-                })
-                .orElseGet(() -> {
-                    inv.setStore(store);     // 🔥 REQUIRED
-                    inv.setProduct(product); // 🔥 REQUIRED
-                    return inventoryRepo.save(inv);
-                });
-    }
-
-    @Override
-    public List<InventoryLevel> getInventoryForStore(Long storeId) {
-        return inventoryRepo.findByStore_Id(storeId);
-    }
-
-    @Override
-    public List<InventoryLevel> getInventoryForProduct(Long productId) {
-        return inventoryRepo.findByProduct_Id(productId);
-    }
+    return inventoryRepo.findByStoreAndProduct(store, product)
+            .map(existing -> {
+                existing.setQuantity(inv.getQuantity());
+                return inventoryRepo.save(existing);
+            })
+            .orElseGet(() -> {
+                inv.setStore(store);
+                inv.setProduct(product);
+                return inventoryRepo.save(inv);
+            });
 }
