@@ -6,7 +6,6 @@ import com.example.demo.service.DemandForecastService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -18,26 +17,14 @@ public class DemandForecastServiceImpl implements DemandForecastService {
         this.repository = repository;
     }
 
+    // ✅ MUST MATCH INTERFACE EXACTLY
     @Override
     @Transactional
-    public DemandForecast createForecast(
-            com.example.demo.entity.Store store,
-            com.example.demo.entity.Product product,
-            LocalDate forecastDate,
-            Integer predictedDemand,
-            Double confidenceScore) {
-
-        DemandForecast forecast = new DemandForecast();
-        forecast.setStore(store);
-        forecast.setProduct(product);
-        forecast.setForecastDate(forecastDate);
-        forecast.setPredictedDemand(predictedDemand); // REQUIRED
-        forecast.setConfidenceScore(confidenceScore);
-
+    public DemandForecast createForecast(DemandForecast forecast) {
         return repository.save(forecast);
     }
 
-    // ✅ REQUIRED BY INTERFACE (FIX)
+    // ✅ MUST MATCH INTERFACE EXACTLY
     @Override
     @Transactional(readOnly = true)
     public List<DemandForecast> getForecastsForStore(Long storeId) {
