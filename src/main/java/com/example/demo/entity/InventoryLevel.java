@@ -4,12 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    name = "inventory_levels",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"store_id", "product_id"})
-    }
-)
+@Table(name = "inventory_levels",
+       uniqueConstraints = @UniqueConstraint(columnNames = {"store_id", "product_id"}))
 public class InventoryLevel {
 
     @Id
@@ -17,37 +13,60 @@ public class InventoryLevel {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "store_id")
     private Store store;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(nullable = false)
-    private int quantity;
+    private Integer quantity;
 
-    @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
     @PrePersist
-    @PreUpdate
-    public void updateTimestamp() {
+    public void prePersist() {
         this.lastUpdated = LocalDateTime.now();
     }
 
-    // ===== GETTERS & SETTERS =====
+    @PreUpdate
+    public void preUpdate() {
+        this.lastUpdated = LocalDateTime.now();
+    }
 
-    public Long getId() { return id; }
+    // ===== Getters & Setters =====
 
-    public Store getStore() { return store; }
-    public void setStore(Store store) { this.store = store; }
+    public Long getId() {
+        return id;
+    }
 
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
+    public Store getStore() {
+        return store;
+    }
 
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public Product getProduct() {
+        return product;
+    }
 
-    public LocalDateTime getLastUpdated() { return lastUpdated; }
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }
