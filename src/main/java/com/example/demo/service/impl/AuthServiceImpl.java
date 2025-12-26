@@ -45,6 +45,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponseDto login(AuthRequestDto dto) {
+
         UserAccount user = userRepo.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new BadRequestException("Invalid credentials"));
 
@@ -53,6 +54,11 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtUtil.generateToken(user);
-        return new AuthResponseDto(token, LocalDateTime.now().plusMillis(jwtUtil.getExpirationMillis()));
+
+        return new AuthResponseDto(
+                token,
+                LocalDateTime.now()
+                        .plusSeconds(jwtUtil.getExpirationMillis() / 1000)
+        );
     }
 }
