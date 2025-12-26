@@ -36,28 +36,8 @@ public class InventoryLevel {
         lastUpdated = LocalDateTime.now();
     }
 
-    // ✅ GETTERS (FIX)
-    public Long getId() {
-        return id;
-    }
+    // getters & setters
 
-    public Store getStore() {
-        return store;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public LocalDateTime getLastUpdated() {
-        return lastUpdated;
-    }
-
-    // SETTERS
     public void setStore(Store store) {
         this.store = store;
     }
