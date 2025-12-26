@@ -12,64 +12,42 @@ public class TransferSuggestion {
     private Long id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "source_store_id")
     private Store sourceStore;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "target_store_id")
     private Store targetStore;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "product_id")
     private Product product;
 
+    @Column(nullable = false)
     private Integer suggestedQuantity;
 
+    @Column(nullable = false)
     private String reason;
 
-    private String status = "PENDING";
+    @Column(nullable = false)
+    private String status;
 
+    // 🔴 REQUIRED BY DB
+    @Column(nullable = false)
+    private Integer priority;
+
+    @Column(nullable = false)
     private LocalDateTime generatedAt;
 
     @PrePersist
     public void prePersist() {
-        this.generatedAt = LocalDateTime.now();
+        if (priority == null) {
+            priority = 1;
+        }
+        generatedAt = LocalDateTime.now();
     }
 
-    // ===== Getters & Setters =====
-
-    public Long getId() {
-        return id;
-    }
-
-    public Store getSourceStore() {
-        return sourceStore;
-    }
-
-    public Store getTargetStore() {
-        return targetStore;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Integer getSuggestedQuantity() {
-        return suggestedQuantity;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getGeneratedAt() {
-        return generatedAt;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // ---------- getters & setters ----------
 
     public void setSourceStore(Store sourceStore) {
         this.sourceStore = sourceStore;
@@ -93,5 +71,9 @@ public class TransferSuggestion {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setPriority(Integer priority) {
+        this.priority = priority;
     }
 }
